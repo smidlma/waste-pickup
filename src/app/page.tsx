@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs'
 import path from 'path'
+import Image from 'next/image'
 import WasteLookup from '@/components/WasteLookup'
 
 export default async function Home() {
@@ -7,19 +8,26 @@ export default async function Home() {
   const fileContents = await fs.readFile(filePath, 'utf8')
   const wasteData = JSON.parse(fileContents)
 
-  // The structure is now: { "rozpis_svozu_odpadu": { ... } }
-  // We pass the inner object to the component
-
   return (
     <main className='min-h-screen bg-zinc-50 dark:bg-black py-12 px-4 font-sans'>
       <div className='max-w-4xl mx-auto text-center mb-10'>
+        <div className='flex justify-center mb-6'>
+          <Image
+            src='https://rychvald.cz/wp-content/uploads/2021/02/znak_rychvald.png'
+            alt='Znak města Rychvald'
+            width={100}
+            height={100}
+            className='h-24 w-auto object-contain drop-shadow-sm'
+            priority
+          />
+        </div>
         <h1 className='text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4'>
           Harmonogram Svozu Odpadu
         </h1>
         <p className='text-lg text-zinc-600 dark:text-zinc-400'>
           {wasteData.rozpis_svozu_odpadu?.platnost
             ? `Platnost: ${wasteData.rozpis_svozu_odpadu.platnost}`
-            : 'Vratimov a okolí'}
+            : 'Rychvald a okolí'}
         </p>
       </div>
 
