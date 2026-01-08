@@ -171,7 +171,8 @@ export default function WasteLookup({ data }: { data: WasteRoot }) {
                   dayName: group.svozovy_den, // "Pátek"
                   dates: getNextPickupDates(group.tydny, group.svozovy_den),
                   areaName: area.nazev,
-                  description: skloType.poznamka,
+                  //@ts-ignore
+                  description: skloType?.poznamka,
                 })
               }
             })
